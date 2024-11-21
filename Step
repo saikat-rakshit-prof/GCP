@@ -1,0 +1,25 @@
+export PROJECT_ID = $(gcloud config get-value project)
+
+docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/cymbal-artifact-repo/cymbal-docker-image:latest .
+
+docker push us-central1-docker.pkg.dev/$PROJECT_ID/cymbal-artifact-repo/cymbal-docker-image:latest
+
+ 
+
+ 
+
+10. 
+
+ 
+
+gcloud run deploy cymbal-freshbot \
+
+--image=us-central1-docker.pkg.dev/$PROJECT_ID/cymbal-artifact-repo/cymbal-docker-image:latest \
+
+--region=us-central1 \
+
+--allow-unauthenticated \
+
+--min-instances=0 \
+
+--max-instances=1
